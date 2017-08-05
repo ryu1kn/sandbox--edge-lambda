@@ -47,6 +47,11 @@
             "ViewerProtocolPolicy": "https-only"
           },
           "Enabled": true,
+          "Logging": {
+            "Bucket": {"Ref": "AssetBucketDomain"},
+            "IncludeCookies": true,
+            "Prefix": "cloudfront-log"
+          },
           "HttpVersion": "http2",
           "Origins": [
             {
@@ -149,8 +154,8 @@
       }
     },
     "EdgeLambdaVersion": {
-      "Type" : "AWS::Lambda::Version",
-      "Properties" : {
+      "Type": "AWS::Lambda::Version",
+      "Properties": {
         "FunctionName": {"Fn::GetAtt": ["EdgeLambdaFunction", "Arn"]}
       }
     },
