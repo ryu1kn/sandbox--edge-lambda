@@ -171,6 +171,13 @@
         "FunctionName": {"Ref": "EdgeLambdaVersion"}
       }
     },
+    "VersionedEdgeLambdaLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {"Fn::Sub": "/aws/lambda/us-east-1.${EdgeLambdaFunction}"},
+        "RetentionInDays": 14
+      }
+    },
     "EdgeLambdaLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
