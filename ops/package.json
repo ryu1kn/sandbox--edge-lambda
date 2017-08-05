@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "predeploy": "yarn install",
+    "deploy": "kumo deploy-module --region $AWS_REGION --verbose",
+    "destroy": "kumo destroy-module --region $AWS_REGION --verbose"
+  },
   "devDependencies": {
     "aws-sdk": "^2.94.0",
     "lodash.merge": "^4.6.0"

@@ -1,4 +1,6 @@
 
+const BUILD_NUMBER = process.env.BUILD_NUMBER;
+
 module.exports = {
   moduleName: 'test-edge-lambda',
   outputsStore: {
@@ -29,8 +31,8 @@ module.exports = {
       type: 'custom',
       run: {
         script: `mkdir -p ../.build \\
-            && cd ../lambda && zip -q -r9 ../.build/$BUILD_NUMBER.zip * \\
-            && aws s3 cp ../.build/$BUILD_NUMBER.zip s3://$BUCKET_NAME/lambdas/$BUILD_NUMBER.zip`,
+            && cd ../lambda && zip -q -r9 ../.build/${BUILD_NUMBER}.zip * \\
+            && aws s3 cp ../.build/${BUILD_NUMBER}.zip s3://$BUCKET_NAME/lambdas/${BUILD_NUMBER}.zip`,
         envVars: {
           BUCKET_NAME: {$ref: '#/_deploymentOutputs/Bucket'}
         }
@@ -54,7 +56,7 @@ module.exports = {
         EdgeLambdaName: 'test-edgelambda',
         PublicDomain: 'test-edgelambda.ryuichi.io',
         LambdaBucket: {$ref: '#/_deploymentOutputs/Bucket'},
-        LambdaKey: 'lambdas/$BUILD_NUMBER.zip',
+        LambdaKey: `lambdas/${BUILD_NUMBER}.zip`,
       }
     },
     {

@@ -1,7 +1,7 @@
 {
   "name": "sandbox--edge-lambda",
   "scripts": {
-    "deploy": "kumo deploy-module --verbose",
-    "destroy": "kumo destroy-module --verbose"
+    "deploy": "cd ops && yarn run deploy",
+    "destroy": "cd ops && yarn run destroy"
   }
 }
