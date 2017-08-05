@@ -1,0 +1,26 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Test Lambda@Edge package store",
+  "Parameters": {
+    "BucketName": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "Bucket": {
+      "Type" : "AWS::S3::Bucket",
+      "DeletionPolicy": "Delete",
+      "Properties" : {
+        "BucketName" : {"Ref": "BucketName"}
+      }
+    }
+  },
+  "Outputs": {
+    "Bucket": {
+      "Description": "Bucket for the project",
+      "Value": {
+        "Ref": "Bucket"
+      }
+    }
+  }
+}

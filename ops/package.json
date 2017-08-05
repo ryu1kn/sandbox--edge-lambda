@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "aws-sdk": "^2.94.0",
+    "lodash.merge": "^4.6.0"
+  }
+}
