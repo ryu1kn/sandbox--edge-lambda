@@ -16,6 +16,9 @@
     },
     "LambdaKey": {
       "Type": "String"
+    },
+    "LambdaCodeSha256": {
+      "Type": "String"
     }
   },
   "Mappings": {
@@ -153,10 +156,11 @@
         ]
       }
     },
-    "EdgeLambdaVersion": {
+    "EdgeLambdaVersionA": {
       "Type": "AWS::Lambda::Version",
       "Properties": {
-        "FunctionName": {"Fn::GetAtt": ["EdgeLambdaFunction", "Arn"]}
+        "FunctionName": {"Fn::GetAtt": ["EdgeLambdaFunction", "Arn"]},
+        "CodeSha256": {"Ref": "LambdaCodeSha256"}
       }
     },
     "EdgeLambdaPermission1": {
@@ -164,7 +168,7 @@
       "Properties": {
         "Principal": "edgelambda.amazonaws.com",
         "Action": "lambda:InvokeFunction",
-        "FunctionName": {"Ref": "EdgeLambdaVersion"},
+        "FunctionName": {"Ref": "EdgeLambdaVersionA"},
         "SourceArn": {"Fn::Sub": "arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}"}
       }
     },
@@ -173,7 +177,7 @@
       "Properties": {
         "Principal": "replicator.lambda.amazonaws.com",
         "Action": "lambda:GetFunction",
-        "FunctionName": {"Ref": "EdgeLambdaVersion"}
+        "FunctionName": {"Ref": "EdgeLambdaVersionA"}
       }
     },
     "VersionedEdgeLambdaLogGroup": {
@@ -198,7 +202,7 @@
     },
     "VersionedEdgeLambdaArn": {
       "Description": "ARN of Versioned Edge Lambda",
-      "Value": {"Ref": "EdgeLambdaVersion"}
+      "Value": {"Ref": "EdgeLambdaVersionA"}
     }
   }
 }

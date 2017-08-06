@@ -39,10 +39,20 @@ module.exports = {
       }
     },
     {
+      id: 'calculate-lambda-sha256',
+      type: 'custom',
+      run: {
+        script: `node compute-sha256.js ../.build/${BUILD_NUMBER}.zip > $TASK_OUTPUTS_FILE`,
+        envVars: {
+          TASK_OUTPUTS_FILE: {$ref: '#/_taskOutputsFile'}
+        }
+      }
+    },
+    {
       id: 'upload-asset-bucket-contents',
       type: 'custom',
       run: {
-        script: 'aws s3 cp -r ../asset-bucket-contents/* s3://$BUCKET_NAME',
+        script: 'aws s3 cp --recursive ../asset-bucket-contents s3://$BUCKET_NAME',
         envVars: {
           BUCKET_NAME: {$ref: '#/_deploymentOutputs/Bucket'}
         }
@@ -67,6 +77,7 @@ module.exports = {
         PublicDomain: 'test-edgelambda.ryuichi.io',
         LambdaBucket: {$ref: '#/_deploymentOutputs/Bucket'},
         LambdaKey: `lambdas/${BUILD_NUMBER}.zip`,
+        LambdaCodeSha256: {$ref: '#/_deploymentOutputs/LambdaCodeSha256'}
       }
     },
     {
