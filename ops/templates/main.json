@@ -55,7 +55,7 @@
             "IncludeCookies": true,
             "Prefix": "cloudfront-log"
           },
-          "HttpVersion": "http2",
+          "HttpVersion": "http1.1",
           "Origins": [
             {
               "DomainName": {"Ref": "AssetBucketDomain"},
