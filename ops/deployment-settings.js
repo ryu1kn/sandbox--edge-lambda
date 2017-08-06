@@ -39,6 +39,16 @@ module.exports = {
       }
     },
     {
+      id: 'upload-asset-bucket-contents',
+      type: 'custom',
+      run: {
+        script: 'aws s3 cp -r ../asset-bucket-contents/* s3://$BUCKET_NAME',
+        envVars: {
+          BUCKET_NAME: {$ref: '#/_deploymentOutputs/Bucket'}
+        }
+      }
+    },
+    {
       id: 'create-cloudfront-edge-lambda',
       type: 'cf-stack',
       regionOverrides: {
