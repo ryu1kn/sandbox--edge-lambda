@@ -17,7 +17,7 @@ module.exports = {
       },
       stackName: 'test-edge-lambda-package-store',
       stackTemplate: {
-        script: 'cp ./package-store.json $TEMPLATE_OUTPUT_FILE',
+        script: 'cp ./templates/package-store.json $TEMPLATE_OUTPUT_FILE',
         envVars: {
           TEMPLATE_OUTPUT_FILE: {$ref: '#/_templateOutputFile'}
         }
@@ -46,7 +46,7 @@ module.exports = {
       },
       stackName: 'test-edge-lambda-module',
       stackTemplate: {
-        script: 'cp ./main.json $TEMPLATE_OUTPUT_FILE',
+        script: 'cp ./templates/main.json $TEMPLATE_OUTPUT_FILE',
         envVars: {
           TEMPLATE_OUTPUT_FILE: {$ref: '#/_templateOutputFile'}
         }
