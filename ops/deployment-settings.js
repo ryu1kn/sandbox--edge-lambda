@@ -66,7 +66,7 @@ module.exports = {
       },
       stackName: 'test-edge-lambda-module',
       stackTemplate: {
-        script: 'cp ./templates/main.json $TEMPLATE_OUTPUT_FILE',
+        script: `sed "s/__EdgeLambdaVersion__/EdgeLambdaVersion${BUILD_NUMBER}/g" ./templates/main.json > $TEMPLATE_OUTPUT_FILE`,
         envVars: {
           TEMPLATE_OUTPUT_FILE: {$ref: '#/_templateOutputFile'}
         }
